@@ -14,7 +14,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 
 // Context
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, ProtectedRoute } from './context/AuthContext';
 
 function App() {
   return (
@@ -31,7 +31,11 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             
             {/* Protected Routes */}
-            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            } />
             
             {/* 404 Route */}
             <Route path="*" element={<NotFoundPage />} />
