@@ -80,14 +80,21 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Serve React app in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-  
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+// API-only 404 handler for non-API routes
+app.get('*', (req, res) => {
+  res.status(404).json({ 
+    error: 'API endpoint not found',
+    message: 'This is an API-only server. Frontend is available at https://business-webs4.netlify.app',
+    availableEndpoints: [
+      '/api/health',
+      '/api/auth/*',
+      '/api/bookings/*',
+      '/api/services/*',
+      '/api/uploads/*',
+      '/api/dashboard/*'
+    ]
   });
-}
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -96,11 +103,6 @@ app.use((err, req, res, next) => {
     error: 'Something went wrong!',
     message: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error'
   });
-});
-
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({ error: 'Route not found' });
 });
 
 app.listen(PORT, () => {
