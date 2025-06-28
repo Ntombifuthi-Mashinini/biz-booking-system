@@ -1,5 +1,4 @@
 import axios from 'axios';
-import toast from 'react-hot-toast';
 
 // Create axios instance
 const api = axios.create({
@@ -45,45 +44,45 @@ api.interceptors.response.use(
         
         case 403:
           // Forbidden - show access denied message
-          toast.error('Access denied. You do not have permission to perform this action.');
+          console.error('Access denied. You do not have permission to perform this action.');
           break;
         
         case 404:
           // Not found
-          toast.error('Resource not found.');
+          console.error('Resource not found.');
           break;
         
         case 422:
           // Validation error
           if (data.details) {
             data.details.forEach(detail => {
-              toast.error(detail.msg);
+              console.error(detail.msg);
             });
           } else {
-            toast.error(data.error || 'Validation failed');
+            console.error(data.error || 'Validation failed');
           }
           break;
         
         case 429:
           // Rate limit exceeded
-          toast.error('Too many requests. Please try again later.');
+          console.error('Too many requests. Please try again later.');
           break;
         
         case 500:
           // Server error
-          toast.error('Server error. Please try again later.');
+          console.error('Server error. Please try again later.');
           break;
         
         default:
           // Other errors
-          toast.error(data.error || 'An error occurred');
+          console.error(data.error || 'An error occurred');
       }
     } else if (error.request) {
       // Network error
-      toast.error('Network error. Please check your connection.');
+      console.error('Network error. Please check your connection.');
     } else {
       // Other error
-      toast.error('An unexpected error occurred');
+      console.error('An unexpected error occurred');
     }
     
     return Promise.reject(error);

@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
 import api from '../utils/api';
 
 // Initial state
@@ -137,7 +136,7 @@ export const AuthProvider = ({ children }) => {
         payload: { user, token }
       });
       
-      toast.success('Login successful!');
+      console.log('Login successful!');
       navigate('/dashboard');
       
       return { success: true };
@@ -148,7 +147,7 @@ export const AuthProvider = ({ children }) => {
         payload: errorMessage
       });
       
-      toast.error(errorMessage);
+      console.error(errorMessage);
       return { success: false, error: errorMessage };
     }
   };
@@ -169,7 +168,7 @@ export const AuthProvider = ({ children }) => {
         payload: { user, token }
       });
       
-      toast.success('Registration successful! Welcome to your dashboard.');
+      console.log('Registration successful! Welcome to your dashboard.');
       navigate('/dashboard');
       
       return { success: true };
@@ -180,7 +179,7 @@ export const AuthProvider = ({ children }) => {
         payload: errorMessage
       });
       
-      toast.error(errorMessage);
+      console.error(errorMessage);
       return { success: false, error: errorMessage };
     }
   };
@@ -191,7 +190,7 @@ export const AuthProvider = ({ children }) => {
     delete api.defaults.headers.common['Authorization'];
     
     dispatch({ type: AUTH_ACTIONS.LOGOUT });
-    toast.success('Logged out successfully');
+    console.log('Logged out successfully');
     navigate('/');
   };
 
@@ -206,11 +205,11 @@ export const AuthProvider = ({ children }) => {
         payload: updatedUser
       });
       
-      toast.success('Profile updated successfully');
+      console.log('Profile updated successfully');
       return { success: true };
     } catch (error) {
       const errorMessage = error.response?.data?.error || 'Failed to update profile';
-      toast.error(errorMessage);
+      console.error(errorMessage);
       return { success: false, error: errorMessage };
     }
   };
@@ -219,11 +218,11 @@ export const AuthProvider = ({ children }) => {
   const changePassword = async (passwordData) => {
     try {
       await api.put('/auth/change-password', passwordData);
-      toast.success('Password changed successfully');
+      console.log('Password changed successfully');
       return { success: true };
     } catch (error) {
       const errorMessage = error.response?.data?.error || 'Failed to change password';
-      toast.error(errorMessage);
+      console.error(errorMessage);
       return { success: false, error: errorMessage };
     }
   };
