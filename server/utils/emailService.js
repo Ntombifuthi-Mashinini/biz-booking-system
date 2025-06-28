@@ -10,7 +10,7 @@ class EmailService {
   // Initialize email transporter
   initializeTransporter() {
     // For development, use a test account or configure your email service
-    this.transporter = nodemailer.createTransporter({
+    this.transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST || 'smtp.gmail.com',
       port: process.env.EMAIL_PORT || 587,
       secure: false, // true for 465, false for other ports
@@ -220,15 +220,15 @@ class EmailService {
       <body>
         <div class="container">
           <div class="header">
-            <h1>✅ Payment Confirmed</h1>
+            <h1>Payment Confirmed!</h1>
           </div>
           <div class="content">
             <p>Dear ${booking.clientName},</p>
             <p>Great news! Your payment has been received and verified. Your appointment is now confirmed.</p>
             
             <div class="success-info">
-              <h4>🎉 Appointment Confirmed!</h4>
-              <p>Your appointment has been successfully confirmed and is now in our schedule.</p>
+              <h4>✅ Appointment Confirmed</h4>
+              <p>Your booking is now active and confirmed.</p>
             </div>
 
             <div class="booking-details">
@@ -237,10 +237,13 @@ class EmailService {
               <p><strong>Date:</strong> ${appointmentDate}</p>
               <p><strong>Time:</strong> ${appointmentTime}</p>
               <p><strong>Duration:</strong> ${booking.duration} minutes</p>
-              <p><strong>Amount Paid:</strong> $${booking.totalAmount}</p>
+              <p><strong>Total Amount:</strong> $${booking.totalAmount}</p>
+              ${booking.notes ? `<p><strong>Notes:</strong> ${booking.notes}</p>` : ''}
             </div>
 
             <p>We look forward to seeing you!</p>
+            
+            <p>If you need to make any changes, please contact us as soon as possible.</p>
             
             <p>Best regards,<br>Your Business Team</p>
           </div>
@@ -277,7 +280,7 @@ class EmailService {
       <body>
         <div class="container">
           <div class="header">
-            <h1>⏰ Appointment Reminder</h1>
+            <h1>Appointment Reminder</h1>
           </div>
           <div class="content">
             <p>Dear ${booking.clientName},</p>
@@ -294,6 +297,7 @@ class EmailService {
               <p><strong>Date:</strong> ${appointmentDate}</p>
               <p><strong>Time:</strong> ${appointmentTime}</p>
               <p><strong>Duration:</strong> ${booking.duration} minutes</p>
+              ${booking.notes ? `<p><strong>Notes:</strong> ${booking.notes}</p>` : ''}
             </div>
 
             <p>If you need to reschedule or cancel, please contact us as soon as possible.</p>
@@ -335,15 +339,15 @@ class EmailService {
       <body>
         <div class="container">
           <div class="header">
-            <h1>❌ Appointment Cancelled</h1>
+            <h1>Appointment Cancelled</h1>
           </div>
           <div class="content">
             <p>Dear ${booking.clientName},</p>
             <p>Your appointment has been cancelled as requested.</p>
             
             <div class="cancellation-info">
-              <h4>Cancelled Appointment</h4>
-              <p>We have processed your cancellation request.</p>
+              <h4>❌ Appointment Cancelled</h4>
+              <p>If you did not request this cancellation, please contact us immediately.</p>
             </div>
 
             <div class="booking-details">
@@ -352,10 +356,10 @@ class EmailService {
               <p><strong>Date:</strong> ${appointmentDate}</p>
               <p><strong>Time:</strong> ${appointmentTime}</p>
               <p><strong>Duration:</strong> ${booking.duration} minutes</p>
-              ${booking.cancellationReason ? `<p><strong>Reason:</strong> ${booking.cancellationReason}</p>` : ''}
+              <p><strong>Amount:</strong> $${booking.totalAmount}</p>
             </div>
 
-            <p>If you would like to book a new appointment, please visit our booking system.</p>
+            <p>If you would like to book a new appointment, please visit our website.</p>
             
             <p>Thank you for your understanding.</p>
             
@@ -394,26 +398,30 @@ class EmailService {
       <body>
         <div class="container">
           <div class="header">
-            <h1>🔄 Appointment Rescheduled</h1>
+            <h1>Appointment Rescheduled</h1>
           </div>
           <div class="content">
             <p>Dear ${booking.clientName},</p>
             <p>Your appointment has been successfully rescheduled.</p>
             
             <div class="reschedule-info">
-              <h4>✅ Reschedule Confirmed</h4>
-              <p>Your appointment has been updated with the new date and time.</p>
+              <h4>📅 Appointment Rescheduled</h4>
+              <p>Please note the new date and time below.</p>
             </div>
 
             <div class="booking-details">
               <h3>Updated Appointment Details:</h3>
               <p><strong>Service:</strong> ${booking.serviceName}</p>
-              <p><strong>Date:</strong> ${appointmentDate}</p>
-              <p><strong>Time:</strong> ${appointmentTime}</p>
+              <p><strong>New Date:</strong> ${appointmentDate}</p>
+              <p><strong>New Time:</strong> ${appointmentTime}</p>
               <p><strong>Duration:</strong> ${booking.duration} minutes</p>
+              <p><strong>Amount:</strong> $${booking.totalAmount}</p>
+              ${booking.notes ? `<p><strong>Notes:</strong> ${booking.notes}</p>` : ''}
             </div>
 
             <p>We look forward to seeing you at the new time!</p>
+            
+            <p>If you have any questions, please don't hesitate to contact us.</p>
             
             <p>Best regards,<br>Your Business Team</p>
           </div>
@@ -450,15 +458,15 @@ class EmailService {
       <body>
         <div class="container">
           <div class="header">
-            <h1>📅 New Booking Received</h1>
+            <h1>New Booking Received</h1>
           </div>
           <div class="content">
             <p>Hello Business Owner,</p>
             <p>You have received a new booking request.</p>
             
             <div class="notification-info">
-              <h4>🆕 New Appointment Request</h4>
-              <p>A client has requested an appointment and is waiting for payment verification.</p>
+              <h4>📋 New Booking</h4>
+              <p>Please review the details and take appropriate action.</p>
             </div>
 
             <div class="booking-details">
@@ -470,14 +478,14 @@ class EmailService {
               <p><strong>Date:</strong> ${appointmentDate}</p>
               <p><strong>Time:</strong> ${appointmentTime}</p>
               <p><strong>Duration:</strong> ${booking.duration} minutes</p>
-              <p><strong>Total Amount:</strong> $${booking.totalAmount}</p>
+              <p><strong>Amount:</strong> $${booking.totalAmount}</p>
               <p><strong>Status:</strong> ${booking.status}</p>
               ${booking.notes ? `<p><strong>Notes:</strong> ${booking.notes}</p>` : ''}
             </div>
 
-            <p>Please review the booking and verify payment when received.</p>
+            <p>Please log into your dashboard to manage this booking.</p>
             
-            <p>Best regards,<br>Booking System</p>
+            <p>Best regards,<br>BizBooking System</p>
           </div>
           <div class="footer">
             <p>Coded by Ntombifuthi Mashinini © 2025</p>
@@ -489,4 +497,6 @@ class EmailService {
   }
 }
 
-module.exports = new EmailService(); 
+// Create and export a single instance
+const emailService = new EmailService();
+module.exports = emailService; 
