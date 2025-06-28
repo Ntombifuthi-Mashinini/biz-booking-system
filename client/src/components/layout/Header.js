@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   FaCalendarAlt, 
   FaUser, 
@@ -17,7 +17,6 @@ const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
   const location = useLocation();
-  const navigate = useNavigate();
 
   const navigation = [
     { name: 'Home', href: '/', icon: FaHome },

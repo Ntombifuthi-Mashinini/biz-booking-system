@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaEnvelope, FaPhone, FaUser, FaPaperPlane } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaPaperPlane } from 'react-icons/fa';
 
 const ContactPage = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
