@@ -1,14 +1,40 @@
+# Client directory (React app)
 client/
+client/*
+
+# Node modules
 node_modules/
+node_modules/*
+
+# Git files
 .git/
 .gitignore
+
+# Documentation
 README.md
 NETLIFY_DEPLOYMENT.md
+RAILWAY_DEPLOYMENT.md
+
+# Environment files
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Log files
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log* 
+yarn-error.log*
+
+# Build artifacts
+build/
+dist/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db 
