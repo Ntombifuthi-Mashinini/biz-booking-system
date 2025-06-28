@@ -173,6 +173,8 @@ export const dashboardAPI = {
     params: { format, ...dateRange },
     responseType: format === 'csv' ? 'blob' : 'json'
   }),
+  getStats: () => api.get('/dashboard/stats'),
+  getRecentBookings: () => api.get('/dashboard/recent-bookings'),
 };
 
 // Utility functions
