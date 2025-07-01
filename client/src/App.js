@@ -12,6 +12,9 @@ import NotFoundPage from './pages/NotFoundPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
+import BookingPage from './pages/BookingPage';
+import BookingConfirmationPage from './pages/BookingConfirmationPage';
+import ServiceManagementPage from './pages/ServiceManagementPage';
 
 // Context
 import { AuthProvider, ProtectedRoute } from './context/AuthContext';
@@ -29,11 +32,18 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/book" element={<BookingPage />} />
+            <Route path="/booking-confirmation/:bookingId" element={<BookingConfirmationPage />} />
             
             {/* Protected Routes */}
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <DashboardPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/services" element={
+              <ProtectedRoute>
+                <ServiceManagementPage />
               </ProtectedRoute>
             } />
             

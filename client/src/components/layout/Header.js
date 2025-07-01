@@ -20,8 +20,13 @@ const Header = () => {
 
   const navigation = [
     { name: 'Home', href: '/', icon: FaHome },
+    { name: 'Book Now', href: '/book', icon: FaCalendarAlt },
+    { name: 'Contact', href: '/contact', icon: FaConciergeBell },
+  ];
+
+  const adminNavigation = [
+    { name: 'Dashboard', href: '/dashboard', icon: FaCog },
     { name: 'Services', href: '/services', icon: FaConciergeBell },
-    { name: 'Book Now', href: '/booking', icon: FaCalendarAlt },
   ];
 
   const isActive = (path) => location.pathname === path;

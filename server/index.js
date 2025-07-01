@@ -39,7 +39,8 @@ app.use('/api/', limiter);
 const allowedOrigins = [
   'http://localhost:3000',
   'https://business-webs4.netlify.app',
-  'https://ntombifuthi-mashinini.github.io'
+  'https://ntombifuthi-mashinini.github.io',
+  'https://biz-biz-syste.netlify.app'
 ];
 
 app.use(cors({

@@ -79,7 +79,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/booking"
+                  to="/book"
                   className="text-gray-300 hover:text-white transition-colors duration-200"
                 >
                   Book Now
