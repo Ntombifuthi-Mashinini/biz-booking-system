@@ -69,7 +69,7 @@ router.post('/login', [
     }
 
     const { email, password } = req.body;
-    const user = await User.getUserByEmail(email);
+    const user = await User.getUserByEmailRaw(email);
     
     if (!user || !user.isActive) {
       return res.status(401).json({ error: 'Invalid email or password' });

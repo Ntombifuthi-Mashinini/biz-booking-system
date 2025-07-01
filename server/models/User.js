@@ -203,6 +203,11 @@ class User {
     const user = this.users.find(u => u.email === email && u.isActive);
     return user ? this.sanitizeUser(user) : null;
   }
+
+  // Get user by email (raw, for login)
+  getUserByEmailRaw(email) {
+    return this.users.find(u => u.email === email && u.isActive);
+  }
 }
 
 module.exports = new User(); 
