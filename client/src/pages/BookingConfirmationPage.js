@@ -8,10 +8,6 @@ const BookingConfirmationPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchBookingDetails();
-  }, [bookingId, fetchBookingDetails]);
-
   const fetchBookingDetails = async () => {
     try {
       const response = await fetch(`/api/bookings/${bookingId}`);
@@ -27,6 +23,11 @@ const BookingConfirmationPage = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchBookingDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bookingId]);
 
   if (loading) {
     return (
