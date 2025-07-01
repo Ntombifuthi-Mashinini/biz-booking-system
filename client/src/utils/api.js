@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+
 // Create axios instance with base URL
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -27,7 +29,7 @@ export const authAPI = {
 
 // Services API
 export const servicesAPI = {
-  getAll: () => api.get('/services'),
+  getAll: (config) => api.get('/services', config),
   getById: (id) => api.get(`/services/${id}`),
   create: (serviceData) => api.post('/services', serviceData),
   update: (id, serviceData) => api.put(`/services/${id}`, serviceData),

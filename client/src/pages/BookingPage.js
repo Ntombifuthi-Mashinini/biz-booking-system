@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useAuth } from '../context/AuthContext';
+import { servicesAPI } from '../utils/api';
 
 const BookingPage = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
@@ -24,18 +27,18 @@ const BookingPage = () => {
   ];
 
   useEffect(() => {
-    fetchServices();
-  }, []);
+    if (user && user.id) {
+      fetchServices(user.id);
+    }
+  }, [user]);
 
-  const fetchServices = async () => {
+  const fetchServices = async (businessId) => {
     try {
-      const response = await fetch('/api/services');
-      if (response.ok) {
-        const data = await response.json();
-        setServices(data);
-      }
+      const response = await servicesAPI.getAll({ params: { businessId } });
+      setServices(response.data.services);
     } catch (error) {
       console.error('Error fetching services:', error);
+      setError('Failed to load services.');
     }
   };
 
