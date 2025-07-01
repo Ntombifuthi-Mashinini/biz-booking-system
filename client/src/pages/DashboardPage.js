@@ -99,11 +99,11 @@ const DashboardPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
+      {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-gray-600 mt-2">Manage your bookings and services</p>
-        </div>
+      </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -115,8 +115,8 @@ const DashboardPage = () => {
               <div className="p-2 bg-blue-100 rounded-lg">
                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-              </div>
+                  </svg>
+                </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Bookings</p>
                 <p className="text-2xl font-semibold text-gray-900">{stats.totalBookings}</p>
@@ -149,7 +149,7 @@ const DashboardPage = () => {
               <div className="p-2 bg-green-100 rounded-lg">
                 <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                  </svg>
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Confirmed</p>
@@ -166,7 +166,7 @@ const DashboardPage = () => {
               <div className="p-2 bg-green-100 rounded-lg">
                 <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                </svg>
+                  </svg>
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Revenue</p>
@@ -174,7 +174,7 @@ const DashboardPage = () => {
               </div>
             </div>
           </motion.div>
-        </div>
+          </div>
 
         {/* Tabs */}
         <div className="bg-white rounded-lg shadow mb-8">
@@ -245,46 +245,46 @@ const DashboardPage = () => {
                       <option value="confirmed">Confirmed</option>
                       <option value="cancelled">Cancelled</option>
                     </select>
-                  </div>
-                </div>
-                
+          </div>
+        </div>
+
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Client
-                        </th>
+                    Client
+                  </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Service
-                        </th>
+                    Service
+                  </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Date & Time
-                        </th>
+                  </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Status
-                        </th>
+                    Status
+                  </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Actions
                         </th>
-                      </tr>
-                    </thead>
+                </tr>
+              </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                       {bookings.map((booking) => (
                         <tr key={booking._id}>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div>
+                        <div>
                               <div className="text-sm font-medium text-gray-900">{booking.clientName}</div>
                               <div className="text-sm text-gray-500">{booking.clientEmail}</div>
-                            </div>
-                          </td>
+                        </div>
+                      </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="text-sm text-gray-900">{booking.service?.name}</div>
                             <div className="text-sm text-gray-500">R{booking.service?.price}</div>
-                          </td>
+                      </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                             {new Date(booking.date).toLocaleDateString()} at {booking.time}
-                          </td>
+                      </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                               booking.status === 'confirmed' ? 'bg-green-100 text-green-800' :
@@ -292,8 +292,8 @@ const DashboardPage = () => {
                               'bg-gray-100 text-gray-800'
                             }`}>
                               {booking.status}
-                            </span>
-                          </td>
+                        </span>
+                      </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <div className="flex space-x-2">
                               {booking.status === 'pending' && (
@@ -317,10 +317,10 @@ const DashboardPage = () => {
                               </button>
                             </div>
                           </td>
-                        </tr>
+                    </tr>
                       ))}
-                    </tbody>
-                  </table>
+              </tbody>
+            </table>
                 </div>
               </div>
             )}
@@ -376,4 +376,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage; 
+export default DashboardPage;
