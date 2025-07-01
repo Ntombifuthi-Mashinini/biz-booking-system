@@ -24,11 +24,6 @@ const Header = () => {
     { name: 'Contact', href: '/contact', icon: FaConciergeBell },
   ];
 
-  const adminNavigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: FaCog },
-    { name: 'Services', href: '/services', icon: FaConciergeBell },
-  ];
-
   const isActive = (path) => location.pathname === path;
 
   const handleLogout = () => {

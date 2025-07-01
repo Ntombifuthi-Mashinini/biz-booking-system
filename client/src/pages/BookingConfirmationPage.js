@@ -10,7 +10,7 @@ const BookingConfirmationPage = () => {
 
   useEffect(() => {
     fetchBookingDetails();
-  }, [bookingId]);
+  }, [bookingId, fetchBookingDetails]);
 
   const fetchBookingDetails = async () => {
     try {
