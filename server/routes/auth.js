@@ -23,7 +23,7 @@ router.post('/register', [
 
     const { businessName, ownerName, email, password, phone, address } = req.body;
 
-    const existingUser = User.getUserByEmail(email);
+    const existingUser = await User.getUserByEmail(email);
     if (existingUser) {
       return res.status(400).json({ error: 'User with this email already exists' });
     }
@@ -36,7 +36,7 @@ router.post('/register', [
       role: 'business_owner', isActive: true
     };
 
-    const user = User.createUser(userData);
+    const user = await User.createUser(userData);
     const token = jwt.sign(
       { userId: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
@@ -69,7 +69,7 @@ router.post('/login', [
     }
 
     const { email, password } = req.body;
-    const user = User.getUserByEmail(email);
+    const user = await User.getUserByEmail(email);
     
     if (!user || !user.isActive) {
       return res.status(401).json({ error: 'Invalid email or password' });

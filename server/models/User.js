@@ -11,7 +11,7 @@ class User {
     const { email, password, businessName, ownerName, phone, businessType } = userData;
 
     // Check if user already exists
-    const existingUser = this.users.find(user => user.email === email);
+    const existingUser = await this.getUserByEmail(email);
     if (existingUser) {
       throw new Error('User already exists');
     }
@@ -199,14 +199,10 @@ class User {
   }
 
   // Get user by email
-  static getUserByEmail(email) {
-    // If using an instance-based array, we need to search all instances
-    // But for now, let's assume a singleton pattern or static storage is used
-    // For this in-memory model, we'll use a static array
-    if (!this._users) this._users = [];
-    const user = this._users.find(u => u.email === email && u.isActive);
-    return user ? { ...user, password: undefined } : null;
+  async getUserByEmail(email) {
+    const user = this.users.find(u => u.email === email && u.isActive);
+    return user ? this.sanitizeUser(user) : null;
   }
 }
 
-module.exports = User; 
+module.exports = new User(); 
