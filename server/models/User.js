@@ -197,6 +197,16 @@ class User {
 
     return true;
   }
+
+  // Get user by email
+  static getUserByEmail(email) {
+    // If using an instance-based array, we need to search all instances
+    // But for now, let's assume a singleton pattern or static storage is used
+    // For this in-memory model, we'll use a static array
+    if (!this._users) this._users = [];
+    const user = this._users.find(u => u.email === email && u.isActive);
+    return user ? { ...user, password: undefined } : null;
+  }
 }
 
-module.exports = new User(); 
+module.exports = User; 
